@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0b224e;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  .font-serif-school {
+    font-family: 'Lora', Georgia, serif;
+  }
+}
+
+@keyframes marquee-infinite {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-infinite 18s linear infinite;
+}
+
+.animate-marquee-infinite:hover,
+.animate-marquee-infinite:active {
+  animation-play-state: paused;
+}
