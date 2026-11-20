@@ -35,8 +35,8 @@ export function GalleryPage({ onNavigate, lang }: GalleryPageProps) {
       categoryKey: 'campus',
       categoryLabelFr: 'Campus',
       categoryLabelEn: 'Campus',
-      titleFr: 'Bâtiment Principal de l’École Primaire Les Angelos',
-      titleEn: 'Les Angelos Primary School Main Building',
+      titleFr: 'Bâtiment Principal de l’École Internationale Les Angelos',
+      titleEn: 'Les Angelos International School Main Building',
       descriptionFr:
         'Notre bâtiment scolaire accueillant et coloré entouré de pelouses verdoyantes et de palmiers.',
       descriptionEn:
@@ -120,7 +120,7 @@ export function GalleryPage({ onNavigate, lang }: GalleryPageProps) {
       categoryLabelFr: 'Vidéo',
       categoryLabelEn: 'Video',
       titleFr: 'La Vie Scolaire à Les Angelos en Vidéo',
-      titleEn: 'Les Angelos Primary School Life in Action',
+      titleEn: 'Les Angelos International School Life in Action',
       descriptionFr:
         'Découvrez nos élèves et enseignants lors d’une journée joyeuse d’apprentissage et de jeux en plein air.',
       descriptionEn:
@@ -202,8 +202,8 @@ export function GalleryPage({ onNavigate, lang }: GalleryPageProps) {
           </h1>
           <p className="text-[14.5px] sm:text-[17px] text-white/90 max-w-[620px] mt-2">
             {isFr
-              ? 'Découvrez en images les moments d’apprentissage, d’arts créatifs, de sports en plein air et la vie sur le campus de l’École Primaire Les Angelos.'
-              : 'Explore moments of discovery, creative arts, outdoor sports, and campus life at Les Angelos Primary School.'}
+              ? 'Découvrez en images les moments d’apprentissage, d’arts créatifs, de sports en plein air et la vie sur le campus de l’École Internationale Les Angelos.'
+              : 'Explore moments of discovery, creative arts, outdoor sports, and campus life at Les Angelos International School.'}
           </p>
         </div>
       </section>
@@ -220,8 +220,8 @@ export function GalleryPage({ onNavigate, lang }: GalleryPageProps) {
               </div>
               <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#0b2559] leading-tight">
                 {isFr
-                  ? 'Vivez une Journée à l’École Primaire Les Angelos'
-                  : 'Experience a Day at Les Angelos Primary School'}
+                  ? 'Vivez une Journée à l’École Internationale Les Angelos'
+                  : 'Experience a Day at Les Angelos International School'}
               </h2>
               <p className="text-[14.5px] text-[#1c335f] leading-[1.65] mt-3">
                 {isFr

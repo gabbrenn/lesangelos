@@ -342,8 +342,8 @@ export function ContactPage({ onNavigate, lang }: ContactPageProps) {
                 </div>
                 <h3 className="text-[20px] font-extrabold leading-snug">
                   {isFr
-                    ? 'Visitez l’École Primaire Les Angelos en Personne'
-                    : 'Visit Les Angelos Primary School in Person'}
+                    ? 'Visitez l’École Internationale Les Angelos en Personne'
+                    : 'Visit Les Angelos International School in Person'}
                 </h3>
                 <p className="text-[13.5px] text-white/85 leading-[1.6] mt-2.5">
                   {isFr

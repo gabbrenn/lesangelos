@@ -207,8 +207,8 @@ export function AboutPage({ onNavigate, lang }: AboutPageProps) {
           </div>
           <h1 className="text-[30px] sm:text-[44px] font-extrabold tracking-tight leading-tight">
             {isFr
-              ? 'À Propos de l’École Primaire Les Angelos'
-              : 'About Les Angelos Primary School'}
+              ? 'À Propos de l’École Internationale Les Angelos'
+              : 'About Les Angelos International School'}
           </h1>
           <p className="text-[14.5px] sm:text-[17px] text-white/90 max-w-[650px] mt-2">
             {isFr
@@ -236,16 +236,16 @@ export function AboutPage({ onNavigate, lang }: AboutPageProps) {
                 {isFr ? (
                   <>
                     Située au cœur de Kigali, au Rwanda (14 KK 361 St),{' '}
-                    <strong>l’École Primaire Les Angelos</strong> a été fondée avec une mission
-                    claire : offrir aux enfants un cadre inspirant, discipliné et bienveillant où
-                    la rigueur académique s’allie aux valeurs morales.
+                    <strong>l’École Internationale Les Angelos</strong> a été fondée avec une
+                    mission claire : offrir aux enfants un cadre inspirant, discipliné et
+                    bienveillant où la rigueur académique s’allie aux valeurs morales.
                   </>
                 ) : (
                   <>
                     Located in the heart of Kigali, Rwanda (14 KK 361 St),{' '}
-                    <strong>Les Angelos Primary School</strong> was founded with a clear purpose: to
-                    provide children with an inspiring, disciplined, and compassionate environment
-                    where academic rigor meets strong moral character.
+                    <strong>Les Angelos International School</strong> was founded with a clear
+                    purpose: to provide children with an inspiring, disciplined, and compassionate
+                    environment where academic rigor meets strong moral character.
                   </>
                 )}
               </p>
@@ -389,8 +389,8 @@ export function AboutPage({ onNavigate, lang }: AboutPageProps) {
               </h2>
               <p className="text-[14.5px] text-[#1c335f] mt-1">
                 {isFr
-                  ? 'Les piliers qui façonnent la vie quotidienne à l’École Primaire Les Angelos.'
-                  : 'The pillars that shape daily life at Les Angelos Primary School.'}
+                  ? 'Les piliers qui façonnent la vie quotidienne à l’École Internationale Les Angelos.'
+                  : 'The pillars that shape daily life at Les Angelos International School.'}
               </p>
             </div>
             <button
@@ -480,8 +480,8 @@ export function AboutPage({ onNavigate, lang }: AboutPageProps) {
               </div>
               <h2 className="text-[24px] sm:text-[28px] font-extrabold leading-tight">
                 {isFr
-                  ? 'Offrez à Votre Enfant le Meilleur Départ à l’École Primaire Les Angelos'
-                  : 'Give Your Child the Best Start at Les Angelos Primary School'}
+                  ? 'Offrez à Votre Enfant le Meilleur Départ à l’École Internationale Les Angelos'
+                  : 'Give Your Child the Best Start at Les Angelos International School'}
               </h2>
               <p className="text-[14px] sm:text-[15px] text-white/85 mt-2">
                 {isFr

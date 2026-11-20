@@ -127,7 +127,7 @@ export function App() {
 
   const isFr = lang === 'fr';
   const crestSrc = isFr ? '/images/crest-fr.png' : '/images/crest.png';
-  const schoolSubTitle = isFr ? 'École Primaire' : 'Primary School';
+  const schoolSubTitle = isFr ? 'École Internationale' : 'International School';
 
   const highlights = isFr
     ? [
@@ -317,7 +317,7 @@ export function App() {
     ? [
         {
           quote:
-            'L’École Primaire Les Angelos a donné un excellent départ à mon enfant. Les enseignants sont attentionnés et l’environnement scolaire est remarquable.',
+            'L’École Internationale Les Angelos a donné un excellent départ à mon enfant. Les enseignants sont attentionnés et l’environnement scolaire est remarquable.',
           name: 'Mme Umutesi Jeanne',
           role: 'Parent d’élève',
           avatar: '/images/parent-avatar.jpg',
@@ -331,7 +331,7 @@ export function App() {
         },
         {
           quote:
-            'L’équilibre harmonieux entre les matières principales, les arts créatifs et le sport fait de Les Angelos la meilleure école primaire à Kigali.',
+            'L’équilibre harmonieux entre les matières principales, les arts créatifs et le sport fait de Les Angelos la meilleure école internationale à Kigali.',
           name: 'Mme Mukamana Claire',
           role: 'Parent d’élève',
           avatar: '/images/parent-avatar.jpg',
@@ -340,7 +340,7 @@ export function App() {
     : [
         {
           quote:
-            'Les Angelos Primary School has given my child a great start. The teachers are caring and the school environment is excellent.',
+            'Les Angelos International School has given my child a great start. The teachers are caring and the school environment is excellent.',
           name: 'Mrs. Umutesi Jeanne',
           role: 'Parent',
           avatar: '/images/parent-avatar.jpg',
@@ -354,7 +354,7 @@ export function App() {
         },
         {
           quote:
-            'The holistic balance between core subjects, creative arts, and sports makes Les Angelos the best primary school in Kigali.',
+            'The holistic balance between core subjects, creative arts, and sports makes Les Angelos the best international school in Kigali.',
           name: 'Mrs. Mukamana Claire',
           role: 'Parent',
           avatar: '/images/parent-avatar.jpg',
@@ -959,13 +959,13 @@ export function App() {
                   <div className="w-12 h-[3.5px] bg-[#f5c418] rounded-full mb-3" />
                   <h2 className="text-[22px] sm:text-[26px] font-extrabold text-[#0b2559] tracking-tight">
                     {isFr
-                      ? 'À Propos de l’École Primaire Les Angelos'
-                      : 'About Les Angelos Primary School'}
+                      ? 'À Propos de l’École Internationale Les Angelos'
+                      : 'About Les Angelos International School'}
                   </h2>
                   <p className="text-[14.5px] text-[#1c335f] leading-[1.6] mt-3.5">
                     {isFr
-                      ? 'L’École Primaire Les Angelos se consacre à offrir un enseignement de haute qualité dans un environnement convivial et discipliné. Nous croyons que chaque enfant a du potentiel, et nous sommes là pour l’aider à réaliser ses rêves.'
-                      : 'Les Angelos Primary School is dedicated to providing high-quality education in a friendly and disciplined environment. We believe every child has potential, and we are here to help them achieve their dreams.'}
+                      ? 'L’École Internationale Les Angelos se consacre à offrir un enseignement de haute qualité dans un environnement convivial et discipliné. Nous croyons que chaque enfant a du potentiel, et nous sommes là pour l’aider à réaliser ses rêves.'
+                      : 'Les Angelos International School is dedicated to providing high-quality education in a friendly and disciplined environment. We believe every child has potential, and we are here to help them achieve their dreams.'}
                   </p>
                   <p className="text-[14.5px] text-[#1c335f] leading-[1.6] mt-3.5">
                     {isFr
@@ -1425,8 +1425,8 @@ export function App() {
           <div className="max-w-[1160px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
             <p>
               {isFr
-                ? '© 2026 Les Angelos École Primaire. Tous droits réservés.'
-                : '© 2026 Les Angelos Primary School. All rights reserved.'}
+                ? '© 2026 École Internationale Les Angelos. Tous droits réservés.'
+                : '© 2026 Les Angelos International School. All rights reserved.'}
             </p>
             <div className="flex items-center space-x-2.5">
               <button
