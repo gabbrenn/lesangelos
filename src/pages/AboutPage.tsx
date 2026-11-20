@@ -10,82 +10,171 @@ import {
   Target,
   Users,
 } from 'lucide-react';
+import type { Language } from '../App';
 
 interface AboutPageProps {
   onNavigate: (page: 'home' | 'about' | 'gallery' | 'contact') => void;
+  lang: Language;
 }
 
-export function AboutPage({ onNavigate }: AboutPageProps) {
-  const coreValues = [
-    {
-      icon: <Award className="w-7 h-7 text-[#0e4391]" />,
-      title: 'Academic Excellence',
-      description:
-        'We set high academic standards and empower every pupil from Nursery and P1 to P6 with critical thinking, bilingual fluency, and strong numeracy skills.',
-    },
-    {
-      icon: <Heart className="w-7 h-7 text-[#0e4391]" />,
-      title: 'Caring & Safe Community',
-      description:
-        'Every child is known, valued, and supported in a warm, family-oriented environment where curiosity and confidence flourish.',
-    },
-    {
-      icon: <ShieldCheck className="w-7 h-7 text-[#0e4391]" />,
-      title: 'Discipline & Integrity',
-      description:
-        'We instill respect, honesty, responsibility, and kindness as daily habits that shape ethical future leaders.',
-    },
-    {
-      icon: <Sparkles className="w-7 h-7 text-[#0e4391]" />,
-      title: 'Holistic Growth',
-      description:
-        'Beyond classroom lessons, our pupils shine through creative arts, music, drama, physical education, and environmental stewardship.',
-    },
-  ];
+export function AboutPage({ onNavigate, lang }: AboutPageProps) {
+  const isFr = lang === 'fr';
 
-  const milestones = [
-    {
-      number: '100%',
-      label: 'Primary Leaving Pass Rate',
-      sub: 'Consistent top performance in national assessments',
-    },
-    {
-      number: '15:1',
-      label: 'Pupil-to-Teacher Ratio',
-      sub: 'Personalized attention in every classroom',
-    },
-    {
-      number: 'P1 – P6',
-      label: 'Complete Primary Cycle',
-      sub: 'Plus vibrant Nursery & Pre-Primary foundation',
-    },
-    {
-      number: '10+',
-      label: 'Clubs & Co-Curriculars',
-      sub: 'Arts, music, sports, coding, and debate',
-    },
-  ];
+  const coreValues = isFr
+    ? [
+        {
+          icon: <Award className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Excellence Académique',
+          description:
+            'Nous fixons des normes académiques élevées et donnons à chaque élève, de la maternelle et P1 à P6, l’esprit critique, le bilinguisme et de solides compétences.',
+        },
+        {
+          icon: <Heart className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Communauté Bienveillante',
+          description:
+            'Chaque enfant est connu, valorisé et soutenu dans un environnement chaleureux et familial où la curiosité et la confiance s’épanouissent.',
+        },
+        {
+          icon: <ShieldCheck className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Discipline & Intégrité',
+          description:
+            'Nous inculquons le respect, l’honnêteté, la responsabilité et la bonté comme habitudes quotidiennes pour former les leaders éthiques de demain.',
+        },
+        {
+          icon: <Sparkles className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Développement Holistique',
+          description:
+            'Au-delà des cours, nos élèves brillent à travers les arts créatifs, la musique, le théâtre, l’éducation physique et la protection de l’environnement.',
+        },
+      ]
+    : [
+        {
+          icon: <Award className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Academic Excellence',
+          description:
+            'We set high academic standards and empower every pupil from Nursery and P1 to P6 with critical thinking, bilingual fluency, and strong numeracy skills.',
+        },
+        {
+          icon: <Heart className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Caring & Safe Community',
+          description:
+            'Every child is known, valued, and supported in a warm, family-oriented environment where curiosity and confidence flourish.',
+        },
+        {
+          icon: <ShieldCheck className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Discipline & Integrity',
+          description:
+            'We instill respect, honesty, responsibility, and kindness as daily habits that shape ethical future leaders.',
+        },
+        {
+          icon: <Sparkles className="w-7 h-7 text-[#0e4391]" />,
+          title: 'Holistic Growth',
+          description:
+            'Beyond classroom lessons, our pupils shine through creative arts, music, drama, physical education, and environmental stewardship.',
+        },
+      ];
 
-  const facilities = [
-    {
-      title: 'Bright Modern Classrooms',
-      description:
-        'Spacious, well-ventilated learning spaces decorated with visual aids that make reading, math, and science engaging.',
-      image: '/images/learning.jpeg',
-    },
-    {
-      title: 'Expansive Green Playgrounds',
-      description:
-        'Safe outdoor lawns and play structures where children enjoy physical education, team sports, and supervised recreation.',
-      image: '/images/activity1.jpeg',
-    },
-    {
-      title: 'Creative Arts & Activity Studios',
-      description:
-        'Dedicated spaces for drawing, painting, music, and hands-on early childhood discovery.',
-      image: '/images/children.jpeg',
-    },
-  ];
+  const milestones = isFr
+    ? [
+        {
+          number: '100%',
+          label: 'Taux de Réussite au Primaire',
+          sub: 'Excellents résultats constants aux examens nationaux',
+        },
+        {
+          number: '15:1',
+          label: 'Ratio Élèves / Enseignant',
+          sub: 'Un suivi personnalisé dans chaque salle de classe',
+        },
+        {
+          number: 'P1 – P6',
+          label: 'Cycle Primaire Complet',
+          sub: 'Plus une section Maternelle & Préscolaire dynamique',
+        },
+        {
+          number: '10+',
+          label: 'Clubs & Activités Parascolaires',
+          sub: 'Arts, musique, sports, informatique et débat',
+        },
+      ]
+    : [
+        {
+          number: '100%',
+          label: 'Primary Leaving Pass Rate',
+          sub: 'Consistent top performance in national assessments',
+        },
+        {
+          number: '15:1',
+          label: 'Pupil-to-Teacher Ratio',
+          sub: 'Personalized attention in every classroom',
+        },
+        {
+          number: 'P1 – P6',
+          label: 'Complete Primary Cycle',
+          sub: 'Plus vibrant Nursery & Pre-Primary foundation',
+        },
+        {
+          number: '10+',
+          label: 'Clubs & Co-Curriculars',
+          sub: 'Arts, music, sports, coding, and debate',
+        },
+      ];
+
+  const facilities = isFr
+    ? [
+        {
+          title: 'Salles de Classe Modernes & Lumineuses',
+          description:
+            'Des espaces d’apprentissage spacieux, aérés et décorés de supports visuels qui rendent la lecture, les mathématiques et les sciences passionnantes.',
+          image: '/images/learning.jpeg',
+        },
+        {
+          title: 'Aires de Jeux Vertes & Sécurisées',
+          description:
+            'De vastes pelouses et équipements extérieurs où les enfants pratiquent le sport, les jeux d’équipe et la récréation supervisée.',
+          image: '/images/activity1.jpeg',
+        },
+        {
+          title: 'Ateliers d’Arts Créatifs & d’Éveil',
+          description:
+            'Des espaces dédiés au dessin, à la peinture, à la musique et à la découverte pratique dès la petite enfance.',
+          image: '/images/children.jpeg',
+        },
+      ]
+    : [
+        {
+          title: 'Bright Modern Classrooms',
+          description:
+            'Spacious, well-ventilated learning spaces decorated with visual aids that make reading, math, and science engaging.',
+          image: '/images/learning.jpeg',
+        },
+        {
+          title: 'Expansive Green Playgrounds',
+          description:
+            'Safe outdoor lawns and play structures where children enjoy physical education, team sports, and supervised recreation.',
+          image: '/images/activity1.jpeg',
+        },
+        {
+          title: 'Creative Arts & Activity Studios',
+          description:
+            'Dedicated spaces for drawing, painting, music, and hands-on early childhood discovery.',
+          image: '/images/children.jpeg',
+        },
+      ];
+
+  const checkItems = isFr
+    ? [
+        'Corps enseignant qualifié et bienveillant',
+        'Programme bilingue fondé sur les valeurs',
+        'Campus sécurisé, verdoyant et adapté aux enfants',
+        'Partenariat solide entre parents et enseignants',
+      ]
+    : [
+        'Qualified & caring teaching staff',
+        'Bilingual & values-based curriculum',
+        'Safe, green & child-friendly campus',
+        'Strong parent-teacher partnership',
+      ];
 
   return (
     <div className="flex flex-col">
@@ -109,17 +198,22 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               onClick={() => onNavigate('home')}
               className="hover:text-[#f5c418] transition-colors cursor-pointer"
             >
-              Home
+              {isFr ? 'Accueil' : 'Home'}
             </button>
             <span>/</span>
-            <span className="text-[#f5c418] font-semibold">About Us</span>
+            <span className="text-[#f5c418] font-semibold">
+              {isFr ? 'À Propos de Nous' : 'About Us'}
+            </span>
           </div>
-          <h1 className="text-[32px] sm:text-[44px] font-extrabold tracking-tight leading-tight">
-            About Les Angelos Primary School
+          <h1 className="text-[30px] sm:text-[44px] font-extrabold tracking-tight leading-tight">
+            {isFr
+              ? 'À Propos de l’École Primaire Les Angelos'
+              : 'About Les Angelos Primary School'}
           </h1>
-          <p className="text-[15px] sm:text-[17px] text-white/90 max-w-[620px] mt-2">
-            Nurturing Young Minds for a Brighter Future through academic excellence, character
-            formation, and a joyful learning environment in Kigali.
+          <p className="text-[14.5px] sm:text-[17px] text-white/90 max-w-[650px] mt-2">
+            {isFr
+              ? 'Nourrir les jeunes esprits pour un avenir meilleur grâce à l’excellence académique, la formation du caractère et un environnement d’apprentissage joyeux à Kigali.'
+              : 'Nurturing Young Minds for a Brighter Future through academic excellence, character formation, and a joyful learning environment in Kigali.'}
           </p>
         </div>
       </section>
@@ -131,31 +225,38 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <div className="lg:col-span-6 space-y-4">
               <div className="w-12 h-[3.5px] bg-[#f5c418] rounded-full" />
               <span className="text-[12.5px] font-bold uppercase tracking-wider text-[#0e4391] block">
-                Our Story &amp; Heritage
+                {isFr ? 'Notre Histoire & Héritage' : 'Our Story & Heritage'}
               </span>
               <h2 className="text-[26px] sm:text-[32px] font-extrabold text-[#0b2559] leading-tight">
-                A Trusted Foundation for Your Child&apos;s Lifelong Journey
+                {isFr
+                  ? 'Une Base Solide pour le Parcours de Vie de Votre Enfant'
+                  : "A Trusted Foundation for Your Child's Lifelong Journey"}
               </h2>
               <p className="text-[15px] text-[#1c335f] leading-[1.7]">
-                Located in the heart of Kigali, Rwanda, <strong>Les Angelos Primary School</strong>{' '}
-                was founded with a clear purpose: to provide children with an inspiring,
-                disciplined, and compassionate environment where academic rigor meets strong moral
-                character.
+                {isFr ? (
+                  <>
+                    Située au cœur de Kigali, au Rwanda (14 KK 361 St),{' '}
+                    <strong>l’École Primaire Les Angelos</strong> a été fondée avec une mission
+                    claire : offrir aux enfants un cadre inspirant, discipliné et bienveillant où
+                    la rigueur académique s’allie aux valeurs morales.
+                  </>
+                ) : (
+                  <>
+                    Located in the heart of Kigali, Rwanda (14 KK 361 St),{' '}
+                    <strong>Les Angelos Primary School</strong> was founded with a clear purpose: to
+                    provide children with an inspiring, disciplined, and compassionate environment
+                    where academic rigor meets strong moral character.
+                  </>
+                )}
               </p>
               <p className="text-[15px] text-[#1c335f] leading-[1.7]">
-                From our vibrant Nursery classes through Primary 1 to Primary 6 (P1–P6), we blend
-                structured classroom instruction with interactive, hands-on discovery. Our
-                experienced educators work closely with parents to recognize each pupil&apos;s
-                unique strengths and guide them toward their full potential.
+                {isFr
+                  ? 'De nos classes dynamiques de Maternelle jusqu’au cycle complet du Primaire (P1 à P6), nous combinons un enseignement structuré avec la découverte interactive et pratique. Nos enseignants expérimentés travaillent en étroite collaboration avec les parents pour accompagner chaque élève vers son plein potentiel.'
+                  : "From our vibrant Nursery classes through Primary 1 to Primary 6 (P1–P6), we blend structured classroom instruction with interactive, hands-on discovery. Our experienced educators work closely with parents to recognize each pupil's unique strengths and guide them toward their full potential."}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {[
-                  'Qualified & caring teaching staff',
-                  'Bilingual & values-based curriculum',
-                  'Safe, green & child-friendly campus',
-                  'Strong parent-teacher partnership',
-                ].map((item) => (
+                {checkItems.map((item) => (
                   <div key={item} className="flex items-center space-x-2.5">
                     <CheckCircle2 className="w-5 h-5 text-[#f5c418] fill-[#0b2559] shrink-0" />
                     <span className="text-[13.5px] font-semibold text-[#0b2559]">{item}</span>
@@ -217,11 +318,14 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="text-center max-w-[650px] mx-auto mb-10">
             <div className="w-12 h-[3.5px] bg-[#f5c418] rounded-full mx-auto mb-3" />
             <h2 className="text-[26px] sm:text-[30px] font-extrabold text-[#0b2559]">
-              Our Mission, Vision &amp; Philosophy
+              {isFr
+                ? 'Notre Mission, Vision & Philosophie'
+                : 'Our Mission, Vision & Philosophy'}
             </h2>
             <p className="text-[14.5px] text-[#1c335f] mt-2">
-              Guided by our school crest and motto, everything we do centers on the intellectual,
-              moral, and social flourishing of our pupils.
+              {isFr
+                ? 'Guidés par notre blason et notre devise, tout ce que nous faisons vise l’épanouissement intellectuel, moral et social de nos élèves.'
+                : 'Guided by our school crest and motto, everything we do centers on the intellectual, moral, and social flourishing of our pupils.'}
             </p>
           </div>
 
@@ -231,11 +335,13 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               <div className="w-12 h-12 rounded-xl bg-[#dbe9fd] flex items-center justify-center mb-4">
                 <Target className="w-6 h-6 text-[#0b2559]" />
               </div>
-              <h3 className="text-[19px] font-extrabold text-[#0b2559]">Our Mission</h3>
+              <h3 className="text-[19px] font-extrabold text-[#0b2559]">
+                {isFr ? 'Notre Mission' : 'Our Mission'}
+              </h3>
               <p className="text-[14px] text-[#1c335f] leading-[1.65] mt-2.5">
-                To deliver high-quality, inclusive primary education in a safe, disciplined, and
-                nurturing environment that equips pupils with knowledge, creativity, and strong
-                moral values.
+                {isFr
+                  ? 'Offrir un enseignement primaire inclusif et de haute qualité dans un environnement sûr, discipliné et bienveillant qui dote les élèves de connaissances, de créativité et de solides valeurs morales.'
+                  : 'To deliver high-quality, inclusive primary education in a safe, disciplined, and nurturing environment that equips pupils with knowledge, creativity, and strong moral values.'}
               </p>
             </div>
 
@@ -244,11 +350,13 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               <div className="w-12 h-12 rounded-xl bg-[#f5c418] flex items-center justify-center mb-4">
                 <Compass className="w-6 h-6 text-[#0b2559]" />
               </div>
-              <h3 className="text-[19px] font-extrabold text-white">Our Vision</h3>
+              <h3 className="text-[19px] font-extrabold text-white">
+                {isFr ? 'Notre Vision' : 'Our Vision'}
+              </h3>
               <p className="text-[14px] text-white/90 leading-[1.65] mt-2.5">
-                To be a model primary school in Rwanda recognized for shaping confident,
-                compassionate, and lifelong learners who excel in secondary education and contribute
-                positively to society.
+                {isFr
+                  ? 'Être une école primaire modèle au Rwanda, reconnue pour former des apprenants confiants, compatissants et curieux tout au long de leur vie, prêts à exceller au secondaire et dans la société.'
+                  : 'To be a model primary school in Rwanda recognized for shaping confident, compassionate, and lifelong learners who excel in secondary education and contribute positively to society.'}
               </p>
             </div>
 
@@ -257,11 +365,13 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
               <div className="w-12 h-12 rounded-xl bg-[#dbe9fd] flex items-center justify-center mb-4">
                 <BookOpen className="w-6 h-6 text-[#0b2559]" />
               </div>
-              <h3 className="text-[19px] font-extrabold text-[#0b2559]">Our Educational Approach</h3>
+              <h3 className="text-[19px] font-extrabold text-[#0b2559]">
+                {isFr ? 'Notre Approche Pédagogique' : 'Our Educational Approach'}
+              </h3>
               <p className="text-[14px] text-[#1c335f] leading-[1.65] mt-2.5">
-                We believe children learn best when structured academic mastery is paired with joy,
-                active play, artistic expression, and personalized mentorship from dedicated
-                teachers.
+                {isFr
+                  ? 'Nous croyons que les enfants apprennent mieux lorsque la maîtrise académique est associée à la joie, au jeu actif, à l’expression artistique et à un accompagnement personnalisé.'
+                  : 'We believe children learn best when structured academic mastery is paired with joy, active play, artistic expression, and personalized mentorship from dedicated teachers.'}
               </p>
             </div>
           </div>
@@ -275,17 +385,23 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
             <div>
               <h2 className="text-[25px] sm:text-[28px] font-extrabold text-[#0b2559]">
-                Our Core Values
+                {isFr ? 'Nos Valeurs Fondamentales' : 'Our Core Values'}
               </h2>
               <p className="text-[14.5px] text-[#1c335f] mt-1">
-                The pillars that shape daily life at Les Angelos Primary School.
+                {isFr
+                  ? 'Les piliers qui façonnent la vie quotidienne à l’École Primaire Les Angelos.'
+                  : 'The pillars that shape daily life at Les Angelos Primary School.'}
               </p>
             </div>
             <button
               onClick={() => onNavigate('gallery')}
               className="inline-flex items-center space-x-2 text-[13.5px] font-bold text-[#0b2559] hover:text-[#0e4391] cursor-pointer"
             >
-              <span>See Student Life in Our Gallery</span>
+              <span>
+                {isFr
+                  ? 'Voir la Vie Scolaire dans Notre Galerie'
+                  : 'See Student Life in Our Gallery'}
+              </span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -314,11 +430,14 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
         <div className="max-w-[1160px] mx-auto px-4 sm:px-6">
           <div className="w-12 h-[3.5px] bg-[#f5c418] rounded-full mb-3" />
           <h2 className="text-[25px] sm:text-[28px] font-extrabold text-[#0b2559] mb-2">
-            Our Campus &amp; Learning Environment
+            {isFr
+              ? 'Notre Campus & Cadre d’Apprentissage'
+              : 'Our Campus & Learning Environment'}
           </h2>
           <p className="text-[14.5px] text-[#1c335f] max-w-[680px] mb-8">
-            Designed specifically for young learners, our campus offers a secure, welcoming setting
-            for both indoor study and outdoor exploration.
+            {isFr
+              ? 'Conçu spécialement pour les jeunes apprenants, notre campus offre un cadre sécurisé et accueillant pour l’étude en classe comme pour l’exploration en plein air.'
+              : 'Designed specifically for young learners, our campus offers a secure, welcoming setting for both indoor study and outdoor exploration.'}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -353,14 +472,21 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <div className="max-w-[620px]">
               <div className="inline-flex items-center space-x-2 bg-white/10 text-[#f5c418] text-[12px] font-bold px-3.5 py-1 rounded-full mb-3">
                 <Users className="w-3.5 h-3.5" />
-                <span>Admissions Open for 2026 / 2027</span>
+                <span>
+                  {isFr
+                    ? 'Inscriptions Ouvertes pour 2026 / 2027'
+                    : 'Admissions Open for 2026 / 2027'}
+                </span>
               </div>
               <h2 className="text-[24px] sm:text-[28px] font-extrabold leading-tight">
-                Give Your Child the Best Start at Les Angelos Primary School
+                {isFr
+                  ? 'Offrez à Votre Enfant le Meilleur Départ à l’École Primaire Les Angelos'
+                  : 'Give Your Child the Best Start at Les Angelos Primary School'}
               </h2>
               <p className="text-[14px] sm:text-[15px] text-white/85 mt-2">
-                Schedule a campus tour, meet our teachers, or reach out to our admissions office
-                today.
+                {isFr
+                  ? 'Planifiez une visite du campus, rencontrez nos enseignants ou contactez notre bureau des admissions dès aujourd’hui.'
+                  : 'Schedule a campus tour, meet our teachers, or reach out to our admissions office today.'}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3.5 shrink-0">
@@ -368,14 +494,14 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
                 onClick={() => onNavigate('contact')}
                 className="bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[14px] px-6 py-3 rounded-full shadow-sm transition-all cursor-pointer inline-flex items-center space-x-2"
               >
-                <span>Contact Admissions</span>
+                <span>{isFr ? 'Contacter les Admissions' : 'Contact Admissions'}</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
               <button
                 onClick={() => onNavigate('gallery')}
                 className="border border-white/40 hover:bg-white/10 text-white font-semibold text-[14px] px-6 py-3 rounded-full transition-all cursor-pointer"
               >
-                Explore Photo Gallery
+                {isFr ? 'Explorer la Galerie Photos' : 'Explore Photo Gallery'}
               </button>
             </div>
           </div>

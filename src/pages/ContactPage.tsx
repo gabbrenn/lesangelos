@@ -9,19 +9,22 @@ import {
   MessageSquare,
   Calendar,
 } from 'lucide-react';
+import type { Language } from '../App';
 
 interface ContactPageProps {
   onNavigate: (page: 'home' | 'about' | 'gallery' | 'contact') => void;
+  lang: Language;
 }
 
-export function ContactPage({ onNavigate }: ContactPageProps) {
+export function ContactPage({ onNavigate, lang }: ContactPageProps) {
+  const isFr = lang === 'fr';
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     parentName: '',
     email: '',
     phone: '',
-    childGrade: 'Nursery / Pre-Primary',
-    subject: 'Admissions Inquiry',
+    childGrade: isFr ? 'Maternelle / Préscolaire' : 'Nursery / Pre-Primary',
+    subject: isFr ? 'Demande d’Admission' : 'Admissions Inquiry',
     message: '',
   });
 
@@ -52,17 +55,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               onClick={() => onNavigate('home')}
               className="hover:text-[#f5c418] transition-colors cursor-pointer"
             >
-              Home
+              {isFr ? 'Accueil' : 'Home'}
             </button>
             <span>/</span>
-            <span className="text-[#f5c418] font-semibold">Contact Us</span>
+            <span className="text-[#f5c418] font-semibold">
+              {isFr ? 'Contactez-Nous' : 'Contact Us'}
+            </span>
           </div>
           <h1 className="text-[32px] sm:text-[44px] font-extrabold tracking-tight leading-tight">
-            Get In Touch With Us
+            {isFr ? 'Contactez-Nous' : 'Get In Touch With Us'}
           </h1>
-          <p className="text-[15px] sm:text-[17px] text-white/90 max-w-[600px] mt-2">
-            Have questions about admissions, tuition, or our academic programs? Our team in Kigali
-            is ready to welcome your family.
+          <p className="text-[15px] sm:text-[17px] text-white/90 max-w-[620px] mt-2">
+            {isFr
+              ? 'Vous avez des questions sur les admissions, les frais de scolarité ou nos programmes ? Notre équipe à Kigali est prête à accueillir votre famille.'
+              : 'Have questions about admissions, tuition, or our academic programs? Our team in Kigali is ready to welcome your family.'}
           </p>
         </div>
       </section>
@@ -77,7 +83,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-[15px] font-extrabold text-[#0b2559]">Campus Location</h3>
+                <h3 className="text-[15px] font-extrabold text-[#0b2559]">
+                  {isFr ? 'Adresse du Campus' : 'Campus Location'}
+                </h3>
                 <p className="text-[13px] text-[#2c436f] mt-1 leading-snug">
                   14 KK 361 St, Kigali, Rwanda
                   <br />
@@ -91,7 +99,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-[15px] font-extrabold text-[#0b2559]">Phone Numbers</h3>
+                <h3 className="text-[15px] font-extrabold text-[#0b2559]">
+                  {isFr ? 'Téléphones' : 'Phone Numbers'}
+                </h3>
                 <p className="text-[13.5px] text-[#2c436f] mt-1 leading-snug">
                   <a href="tel:+250785866480" className="hover:text-[#0e4391] font-semibold block">
                     +250 785 866 480
@@ -108,7 +118,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-[15px] font-extrabold text-[#0b2559]">Email Address</h3>
+                <h3 className="text-[15px] font-extrabold text-[#0b2559]">
+                  {isFr ? 'Adresse E-mail' : 'Email Address'}
+                </h3>
                 <p className="text-[13.5px] text-[#2c436f] mt-1 leading-snug break-all">
                   <a
                     href="mailto:lesangelos2021@gmail.com"
@@ -125,11 +137,13 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-[15px] font-extrabold text-[#0b2559]">School Hours</h3>
+                <h3 className="text-[15px] font-extrabold text-[#0b2559]">
+                  {isFr ? 'Horaires d’Ouverture' : 'School Hours'}
+                </h3>
                 <p className="text-[13.5px] text-[#2c436f] mt-1 leading-snug">
-                  Mon – Fri: 7:30 AM – 4:30 PM
+                  {isFr ? 'Lun – Ven : 7h30 – 16h30' : 'Mon – Fri: 7:30 AM – 4:30 PM'}
                   <br />
-                  Sat (Visits): 9:00 AM – 1:00 PM
+                  {isFr ? 'Sam (Visites) : 9h00 – 13h00' : 'Sat (Visits): 9:00 AM – 1:00 PM'}
                 </p>
               </div>
             </div>
@@ -142,25 +156,41 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               <div className="w-12 h-[3.5px] bg-[#f5c418] rounded-full mb-3" />
               <div className="flex items-center space-x-2 text-[#0e4391] text-[12.5px] font-bold uppercase tracking-wider mb-1">
                 <MessageSquare className="w-4 h-4" />
-                <span>Send Us a Message</span>
+                <span>{isFr ? 'Envoyez-Nous un Message' : 'Send Us a Message'}</span>
               </div>
               <h2 className="text-[23px] sm:text-[26px] font-extrabold text-[#0b2559]">
-                Inquire About Admissions or Schedule a Visit
+                {isFr
+                  ? 'Demande d’Admission ou Planification d’une Visite'
+                  : 'Inquire About Admissions or Schedule a Visit'}
               </h2>
               <p className="text-[14px] text-[#2c436f] mt-1 mb-6">
-                Fill out the form below and our school administration will respond promptly.
+                {isFr
+                  ? 'Remplissez le formulaire ci-dessous et notre administration vous répondra dans les plus brefs délais.'
+                  : 'Fill out the form below and our school administration will respond promptly.'}
               </p>
 
               {submitted ? (
                 <div className="bg-[#ebf0fc] border border-[#0e4391]/20 rounded-[12px] p-6 text-center space-y-3">
                   <CheckCircle2 className="w-12 h-12 text-[#082a68] mx-auto" />
                   <h3 className="text-[19px] font-extrabold text-[#0b2559]">
-                    Thank You, {formData.parentName || 'Parent'}!
+                    {isFr
+                      ? `Merci, ${formData.parentName || 'Cher Parent'} !`
+                      : `Thank You, ${formData.parentName || 'Parent'}!`}
                   </h3>
                   <p className="text-[14px] text-[#1c335f] max-w-md mx-auto">
-                    Your inquiry regarding <strong>{formData.subject}</strong> has been received.
-                    Our admissions office will contact you shortly at{' '}
-                    <strong>{formData.phone || formData.email}</strong>.
+                    {isFr ? (
+                      <>
+                        Votre demande concernant <strong>{formData.subject}</strong> a bien été
+                        reçue. Notre bureau des admissions vous contactera très bientôt au{' '}
+                        <strong>{formData.phone || formData.email}</strong>.
+                      </>
+                    ) : (
+                      <>
+                        Your inquiry regarding <strong>{formData.subject}</strong> has been
+                        received. Our admissions office will contact you shortly at{' '}
+                        <strong>{formData.phone || formData.email}</strong>.
+                      </>
+                    )}
                   </p>
                   <button
                     type="button"
@@ -170,14 +200,14 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                         parentName: '',
                         email: '',
                         phone: '',
-                        childGrade: 'Nursery / Pre-Primary',
-                        subject: 'Admissions Inquiry',
+                        childGrade: isFr ? 'Maternelle / Préscolaire' : 'Nursery / Pre-Primary',
+                        subject: isFr ? 'Demande d’Admission' : 'Admissions Inquiry',
                         message: '',
                       });
                     }}
                     className="mt-2 inline-flex bg-[#082a68] text-white font-semibold text-[13px] px-5 py-2.5 rounded-full hover:bg-[#0b3582] transition-colors cursor-pointer"
                   >
-                    Send Another Message
+                    {isFr ? 'Envoyer un Autre Message' : 'Send Another Message'}
                   </button>
                 </div>
               ) : (
@@ -185,7 +215,9 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[13px] font-bold text-[#0b2559] mb-1.5">
-                        Parent / Guardian Full Name *
+                        {isFr
+                          ? 'Nom Complet du Parent / Tuteur *'
+                          : 'Parent / Guardian Full Name *'}
                       </label>
                       <input
                         type="text"
@@ -194,20 +226,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                         onChange={(e) =>
                           setFormData({ ...formData, parentName: e.target.value })
                         }
-                        placeholder="e.g. Mrs. Umutesi Jeanne"
+                        placeholder={isFr ? 'ex. Mme Umutesi Jeanne' : 'e.g. Mrs. Umutesi Jeanne'}
                         className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] text-slate-800 focus:outline-none focus:border-[#082a68]"
                       />
                     </div>
                     <div>
                       <label className="block text-[13px] font-bold text-[#0b2559] mb-1.5">
-                        Phone Number *
+                        {isFr ? 'Numéro de Téléphone *' : 'Phone Number *'}
                       </label>
                       <input
                         type="tel"
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="e.g. +250 785 866 480"
+                        placeholder="ex. +250 785 866 480"
                         className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] text-slate-800 focus:outline-none focus:border-[#082a68]"
                       />
                     </div>
@@ -216,20 +248,20 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[13px] font-bold text-[#0b2559] mb-1.5">
-                        Email Address *
+                        {isFr ? 'Adresse E-mail *' : 'Email Address *'}
                       </label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="yourname@example.com"
+                        placeholder="votrenom@exemple.com"
                         className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] text-slate-800 focus:outline-none focus:border-[#082a68]"
                       />
                     </div>
                     <div>
                       <label className="block text-[13px] font-bold text-[#0b2559] mb-1.5">
-                        Child&apos;s Class Level
+                        {isFr ? 'Niveau Scolaire de l’Enfant' : "Child's Class Level"}
                       </label>
                       <select
                         value={formData.childGrade}
@@ -238,44 +270,52 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                         }
                         className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] text-slate-800 bg-white focus:outline-none focus:border-[#082a68]"
                       >
-                        <option>Nursery / Pre-Primary</option>
-                        <option>Primary 1 (P1)</option>
-                        <option>Primary 2 (P2)</option>
-                        <option>Primary 3 (P3)</option>
-                        <option>Primary 4 (P4)</option>
-                        <option>Primary 5 (P5)</option>
-                        <option>Primary 6 (P6)</option>
+                        <option>{isFr ? 'Maternelle / Préscolaire' : 'Nursery / Pre-Primary'}</option>
+                        <option>{isFr ? '1ère Année Primaire (P1)' : 'Primary 1 (P1)'}</option>
+                        <option>{isFr ? '2ème Année Primaire (P2)' : 'Primary 2 (P2)'}</option>
+                        <option>{isFr ? '3ème Année Primaire (P3)' : 'Primary 3 (P3)'}</option>
+                        <option>{isFr ? '4ème Année Primaire (P4)' : 'Primary 4 (P4)'}</option>
+                        <option>{isFr ? '5ème Année Primaire (P5)' : 'Primary 5 (P5)'}</option>
+                        <option>{isFr ? '6ème Année Primaire (P6)' : 'Primary 6 (P6)'}</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-[13px] font-bold text-[#0b2559] mb-1.5">
-                      Inquiry Topic
+                      {isFr ? 'Objet de la Demande' : 'Inquiry Topic'}
                     </label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] text-slate-800 bg-white focus:outline-none focus:border-[#082a68]"
                     >
-                      <option>Admissions Inquiry</option>
-                      <option>Book a Campus Tour</option>
-                      <option>Tuition &amp; Fee Structure</option>
-                      <option>Academic Curriculum Question</option>
-                      <option>General Feedback / Other</option>
+                      <option>{isFr ? 'Demande d’Admission' : 'Admissions Inquiry'}</option>
+                      <option>{isFr ? 'Planifier une Visite du Campus' : 'Book a Campus Tour'}</option>
+                      <option>
+                        {isFr ? 'Frais de Scolarité & Modalités' : 'Tuition & Fee Structure'}
+                      </option>
+                      <option>
+                        {isFr ? 'Question sur le Programme Scolaire' : 'Academic Curriculum Question'}
+                      </option>
+                      <option>{isFr ? 'Autre Demande' : 'General Feedback / Other'}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-[13px] font-bold text-[#0b2559] mb-1.5">
-                      Your Message *
+                      {isFr ? 'Votre Message *' : 'Your Message *'}
                     </label>
                     <textarea
                       rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="How can we help you and your child?"
+                      placeholder={
+                        isFr
+                          ? 'Comment pouvons-nous vous aider, vous et votre enfant ?'
+                          : 'How can we help you and your child?'
+                      }
                       className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] text-slate-800 focus:outline-none focus:border-[#082a68]"
                     />
                   </div>
@@ -284,7 +324,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     type="submit"
                     className="inline-flex items-center space-x-2 bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[14px] px-7 py-3.5 rounded-full shadow-xs transition-all cursor-pointer"
                   >
-                    <span>Send Message</span>
+                    <span>{isFr ? 'Envoyer le Message' : 'Send Message'}</span>
                     <Send className="w-4 h-4" />
                   </button>
                 </form>
@@ -296,27 +336,42 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
               <div className="bg-[#052968] text-white rounded-[14px] p-6 sm:p-7 shadow-md">
                 <div className="inline-flex items-center space-x-2 text-[#f5c418] text-[12px] font-bold uppercase tracking-wider mb-2">
                   <Calendar className="w-4 h-4" />
-                  <span>Admissions &amp; Campus Visits</span>
+                  <span>
+                    {isFr ? 'Admissions & Visites du Campus' : 'Admissions & Campus Visits'}
+                  </span>
                 </div>
                 <h3 className="text-[20px] font-extrabold leading-snug">
-                  Visit Les Angelos Primary School in Person
+                  {isFr
+                    ? 'Visitez l’École Primaire Les Angelos en Personne'
+                    : 'Visit Les Angelos Primary School in Person'}
                 </h3>
                 <p className="text-[13.5px] text-white/85 leading-[1.6] mt-2.5">
-                  We warmly invite parents and guardians to tour our classrooms, meet our headteacher
-                  and faculty, and see our joyful learning environment firsthand.
+                  {isFr
+                    ? 'Nous invitons chaleureusement les parents et tuteurs à visiter nos salles de classe, rencontrer notre direction et nos enseignants, et découvrir notre cadre d’apprentissage.'
+                    : 'We warmly invite parents and guardians to tour our classrooms, meet our headteacher and faculty, and see our joyful learning environment firsthand.'}
                 </p>
 
                 <div className="mt-5 pt-5 border-t border-white/15 space-y-3 text-[13.5px]">
                   <div className="flex justify-between">
-                    <span className="text-white/75">Registration Office:</span>
-                    <span className="font-semibold">Mon – Fri, 8:00 AM – 4:30 PM</span>
+                    <span className="text-white/75">
+                      {isFr ? 'Bureau des Inscriptions :' : 'Registration Office:'}
+                    </span>
+                    <span className="font-semibold">
+                      {isFr ? 'Lun – Ven, 8h00 – 16h30' : 'Mon – Fri, 8:00 AM – 4:30 PM'}
+                    </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-white/75">Guided Campus Tours:</span>
-                    <span className="font-semibold">Tue &amp; Thu, 9:00 AM – 12:00 PM</span>
+                    <span className="text-white/75">
+                      {isFr ? 'Visites Guidées :' : 'Guided Campus Tours:'}
+                    </span>
+                    <span className="font-semibold">
+                      {isFr ? 'Mar & Jeu, 9h00 – 12h00' : 'Tue & Thu, 9:00 AM – 12:00 PM'}
+                    </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-white/75">Direct Admissions Lines:</span>
+                    <span className="text-white/75">
+                      {isFr ? 'Lignes Directes Admissions :' : 'Direct Admissions Lines:'}
+                    </span>
                     <span className="font-bold text-[#f5c418] text-right">
                       +250 785 866 480
                       <br />
@@ -333,9 +388,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     <h4 className="text-[15px] font-extrabold text-[#0b2559]">
                       14 KK 361 St, Kigali, Rwanda
                     </h4>
-                    <p className="text-[12.5px] text-[#2c436f]">
-                      P.O. Box 2376, Kigali, Rwanda
-                    </p>
+                    <p className="text-[12.5px] text-[#2c436f]">P.O. Box 2376, Kigali, Rwanda</p>
                   </div>
                   <MapPin className="w-5 h-5 text-[#0e4391]" />
                 </div>

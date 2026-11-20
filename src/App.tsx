@@ -9,12 +9,14 @@ import {
   Calendar,
   Menu,
   X,
+  Globe,
 } from 'lucide-react';
 import { AboutPage } from './pages/AboutPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
 
 export type PageRoute = 'home' | 'about' | 'gallery' | 'contact';
+export type Language = 'fr' | 'en';
 
 // Custom crisp vector icons matching the 100% original design
 const FacebookIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
@@ -106,6 +108,7 @@ type HeroMediaItem = {
 };
 
 type NavItem = {
+  key: string;
   label: string;
   page?: PageRoute;
   sectionId?: string;
@@ -114,38 +117,71 @@ type NavItem = {
 };
 
 export function App() {
+  // Default language is French ('fr') per user request
+  const [lang, setLang] = useState<Language>('fr');
   const [currentPage, setCurrentPage] = useState<PageRoute>('home');
   const [heroSlide, setHeroSlide] = useState(0);
   const [testimonialSlide, setTestimonialSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
 
-  const highlights = [
-    {
-      icon: <GraduationCapSolid />,
-      title: 'Quality Education',
-      line1: 'A strong foundation',
-      line2: 'for lifelong learning',
-    },
-    {
-      icon: <UsersGroupSolid />,
-      title: 'Caring Environment',
-      line1: 'A safe and supportive',
-      line2: 'place to grow',
-    },
-    {
-      icon: <TrophyStarSolid />,
-      title: 'Holistic Development',
-      line1: 'Academic, moral and',
-      line2: 'social growth',
-    },
-    {
-      icon: <StarSolid />,
-      title: 'Dedicated Teachers',
-      line1: "Committed to your child's",
-      line2: 'success',
-    },
-  ];
+  const isFr = lang === 'fr';
+  const crestSrc = isFr ? '/images/crest-fr.png' : '/images/crest.png';
+  const schoolSubTitle = isFr ? 'École Primaire' : 'Primary School';
+
+  const highlights = isFr
+    ? [
+        {
+          icon: <GraduationCapSolid />,
+          title: 'Éducation de Qualité',
+          line1: 'Une base solide pour',
+          line2: 'apprendre toute la vie',
+        },
+        {
+          icon: <UsersGroupSolid />,
+          title: 'Cadre Bienveillant',
+          line1: 'Un lieu sûr et',
+          line2: 'encourageant pour grandir',
+        },
+        {
+          icon: <TrophyStarSolid />,
+          title: 'Développement Global',
+          line1: 'Croissance académique,',
+          line2: 'morale et sociale',
+        },
+        {
+          icon: <StarSolid />,
+          title: 'Enseignants Dévoués',
+          line1: 'Engagés pour la réussite',
+          line2: 'de votre enfant',
+        },
+      ]
+    : [
+        {
+          icon: <GraduationCapSolid />,
+          title: 'Quality Education',
+          line1: 'A strong foundation',
+          line2: 'for lifelong learning',
+        },
+        {
+          icon: <UsersGroupSolid />,
+          title: 'Caring Environment',
+          line1: 'A safe and supportive',
+          line2: 'place to grow',
+        },
+        {
+          icon: <TrophyStarSolid />,
+          title: 'Holistic Development',
+          line1: 'Academic, moral and',
+          line2: 'social growth',
+        },
+        {
+          icon: <StarSolid />,
+          title: 'Dedicated Teachers',
+          line1: "Committed to your child's",
+          line2: 'success',
+        },
+      ];
 
   const navigateTo = (page: PageRoute, sectionId?: string) => {
     setCurrentPage(page);
@@ -205,154 +241,240 @@ export function App() {
     return () => clearTimeout(timer);
   }, [currentPage, heroSlide, heroSlides.length]);
 
-  const navItems: NavItem[] = [
-    { label: 'Home', page: 'home' },
-    {
-      label: 'About Us',
-      page: 'about',
-      dropdown: [
-        { label: 'Our Story & Heritage', page: 'about' },
-        { label: 'Mission, Vision & Values', page: 'about' },
-        { label: 'Campus & Facilities', page: 'about' },
-      ],
-    },
-    {
-      label: 'Academics',
-      page: 'home',
-      sectionId: 'academics',
-      dropdown: [
-        { label: 'Nursery & Pre-Primary', page: 'home', sectionId: 'academics' },
-        { label: 'Lower Primary (P1 - P3)', page: 'home', sectionId: 'academics' },
-        { label: 'Upper Primary (P4 - P6)', page: 'home', sectionId: 'academics' },
-        { label: 'Creative Arts & Sports', page: 'home', sectionId: 'academics' },
-      ],
-    },
-    {
-      label: 'Gallery',
-      page: 'gallery',
-      dropdown: [
-        { label: 'Photos & Videos', page: 'gallery' },
-        { label: 'Latest News & Events', page: 'home', sectionId: 'news' },
-      ],
-    },
-    { label: 'Contact', page: 'contact' },
-  ];
+  const navItems: NavItem[] = isFr
+    ? [
+        { key: 'home', label: 'Accueil', page: 'home' },
+        {
+          key: 'about',
+          label: 'À Propos',
+          page: 'about',
+          dropdown: [
+            { label: 'Notre Histoire & Héritage', page: 'about' },
+            { label: 'Mission, Vision & Valeurs', page: 'about' },
+            { label: 'Campus & Infrastructures', page: 'about' },
+          ],
+        },
+        {
+          key: 'academics',
+          label: 'Programmes',
+          page: 'home',
+          sectionId: 'academics',
+          dropdown: [
+            { label: 'Maternelle & Préscolaire', page: 'home', sectionId: 'academics' },
+            { label: 'Primaire Inférieur (P1 - P3)', page: 'home', sectionId: 'academics' },
+            { label: 'Primaire Supérieur (P4 - P6)', page: 'home', sectionId: 'academics' },
+            { label: 'Arts Créatifs & Sports', page: 'home', sectionId: 'academics' },
+          ],
+        },
+        {
+          key: 'gallery',
+          label: 'Galerie',
+          page: 'gallery',
+          dropdown: [
+            { label: 'Photos & Vidéos', page: 'gallery' },
+            { label: 'Actualités & Événements', page: 'home', sectionId: 'news' },
+          ],
+        },
+        { key: 'contact', label: 'Contact', page: 'contact' },
+      ]
+    : [
+        { key: 'home', label: 'Home', page: 'home' },
+        {
+          key: 'about',
+          label: 'About Us',
+          page: 'about',
+          dropdown: [
+            { label: 'Our Story & Heritage', page: 'about' },
+            { label: 'Mission, Vision & Values', page: 'about' },
+            { label: 'Campus & Facilities', page: 'about' },
+          ],
+        },
+        {
+          key: 'academics',
+          label: 'Academics',
+          page: 'home',
+          sectionId: 'academics',
+          dropdown: [
+            { label: 'Nursery & Pre-Primary', page: 'home', sectionId: 'academics' },
+            { label: 'Lower Primary (P1 - P3)', page: 'home', sectionId: 'academics' },
+            { label: 'Upper Primary (P4 - P6)', page: 'home', sectionId: 'academics' },
+            { label: 'Creative Arts & Sports', page: 'home', sectionId: 'academics' },
+          ],
+        },
+        {
+          key: 'gallery',
+          label: 'Gallery',
+          page: 'gallery',
+          dropdown: [
+            { label: 'Photos & Videos', page: 'gallery' },
+            { label: 'Latest News & Events', page: 'home', sectionId: 'news' },
+          ],
+        },
+        { key: 'contact', label: 'Contact', page: 'contact' },
+      ];
 
-  const testimonials = [
-    {
-      quote:
-        'Les Angelos Primary School has given my child a great start. The teachers are caring and the school environment is excellent.',
-      name: 'Mrs. Umutesi Jeanne',
-      role: 'Parent',
-      avatar: '/images/parent-avatar.jpg',
-    },
-    {
-      quote:
-        'We are truly impressed by the academic discipline and strong moral values instilled in our children every single day.',
-      name: 'Mr. Habimana Eric',
-      role: 'Parent',
-      avatar: '/images/parent-avatar.jpg',
-    },
-    {
-      quote:
-        'The holistic balance between core subjects, creative arts, and sports makes Les Angelos the best primary school in Kigali.',
-      name: 'Mrs. Mukamana Claire',
-      role: 'Parent',
-      avatar: '/images/parent-avatar.jpg',
-    },
-  ];
+  const testimonials = isFr
+    ? [
+        {
+          quote:
+            'L’École Primaire Les Angelos a donné un excellent départ à mon enfant. Les enseignants sont attentionnés et l’environnement scolaire est remarquable.',
+          name: 'Mme Umutesi Jeanne',
+          role: 'Parent d’élève',
+          avatar: '/images/parent-avatar.jpg',
+        },
+        {
+          quote:
+            'Nous sommes vraiment impressionnés par la discipline académique et les fortes valeurs morales inculquées à nos enfants chaque jour.',
+          name: 'M. Habimana Eric',
+          role: 'Parent d’élève',
+          avatar: '/images/parent-avatar.jpg',
+        },
+        {
+          quote:
+            'L’équilibre harmonieux entre les matières principales, les arts créatifs et le sport fait de Les Angelos la meilleure école primaire à Kigali.',
+          name: 'Mme Mukamana Claire',
+          role: 'Parent d’élève',
+          avatar: '/images/parent-avatar.jpg',
+        },
+      ]
+    : [
+        {
+          quote:
+            'Les Angelos Primary School has given my child a great start. The teachers are caring and the school environment is excellent.',
+          name: 'Mrs. Umutesi Jeanne',
+          role: 'Parent',
+          avatar: '/images/parent-avatar.jpg',
+        },
+        {
+          quote:
+            'We are truly impressed by the academic discipline and strong moral values instilled in our children every single day.',
+          name: 'Mr. Habimana Eric',
+          role: 'Parent',
+          avatar: '/images/parent-avatar.jpg',
+        },
+        {
+          quote:
+            'The holistic balance between core subjects, creative arts, and sports makes Les Angelos the best primary school in Kigali.',
+          name: 'Mrs. Mukamana Claire',
+          role: 'Parent',
+          avatar: '/images/parent-avatar.jpg',
+        },
+      ];
 
-  const newsItems = [
-    {
-      date: 'Nov 10, 2026',
-      title: 'School Open Day 2026',
-      image: '/images/activity1.jpeg',
-    },
-    {
-      date: 'Nov 05, 2026',
-      title: 'Creative Learning Session',
-      image: '/images/learning.jpeg',
-    },
-    {
-      date: 'Oct 28, 2026',
-      title: 'Hands-On Art & Painting Activity',
-      image: '/images/children.jpeg',
-    },
-  ];
+  const newsItems = isFr
+    ? [
+        {
+          date: '10 Nov 2026',
+          title: 'Journée Portes Ouvertes 2026',
+          image: '/images/activity1.jpeg',
+        },
+        {
+          date: '05 Nov 2026',
+          title: 'Séance d’Apprentissage Créatif',
+          image: '/images/learning.jpeg',
+        },
+        {
+          date: '28 Oct 2026',
+          title: 'Atelier d’Art & Peinture Pratique',
+          image: '/images/children.jpeg',
+        },
+      ]
+    : [
+        {
+          date: 'Nov 10, 2026',
+          title: 'School Open Day 2026',
+          image: '/images/activity1.jpeg',
+        },
+        {
+          date: 'Nov 05, 2026',
+          title: 'Creative Learning Session',
+          image: '/images/learning.jpeg',
+        },
+        {
+          date: 'Oct 28, 2026',
+          title: 'Hands-On Art & Painting Activity',
+          image: '/images/children.jpeg',
+        },
+      ];
 
   const isNavItemActive = (item: NavItem) => {
-    if (item.label === 'Home' && currentPage === 'home') return true;
-    if (item.label === 'About Us' && currentPage === 'about') return true;
-    if (item.label === 'Gallery' && currentPage === 'gallery') return true;
-    if (item.label === 'Contact' && currentPage === 'contact') return true;
+    if (item.key === 'home' && currentPage === 'home') return true;
+    if (item.key === 'about' && currentPage === 'about') return true;
+    if (item.key === 'gallery' && currentPage === 'gallery') return true;
+    if (item.key === 'contact' && currentPage === 'contact') return true;
     return false;
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#0b224e] selection:bg-[#f5c418] selection:text-[#082253]">
       {/* 1. TOP UTILITY BAR */}
-      <div className="bg-[#022861] text-white text-[12px] sm:text-[13px]">
-        <div className="max-w-[1160px] mx-auto px-4 sm:px-6 py-2 sm:py-0 sm:h-10 flex flex-wrap items-center justify-between gap-y-1.5 gap-x-3">
+      <div className="bg-[#022861] text-white text-[12px] sm:text-[12.5px]">
+        <div className="max-w-[1160px] mx-auto px-4 sm:px-6 min-h-10 py-1.5 flex items-center justify-between gap-3">
           {/* Left Contact Info */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-3.5 lg:space-x-5 overflow-hidden">
+            <div className="flex items-center space-x-1.5 shrink-0">
               <MapPin className="w-3.5 h-3.5 text-white fill-white/15 shrink-0" />
-              <span className="font-normal tracking-tight text-white/95">
+              <span className="font-normal tracking-tight text-white/95 whitespace-nowrap">
                 14 KK 361 St, Kigali, Rwanda
               </span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5 shrink-0">
               <Phone className="w-3.5 h-3.5 text-white fill-white shrink-0" />
               <a
                 href="tel:+250785866480"
-                className="font-normal tracking-tight text-white/95 hover:text-[#f5c418] transition-colors"
+                className="font-normal tracking-tight text-white/95 hover:text-[#f5c418] transition-colors whitespace-nowrap"
               >
                 +250 785 866 480
               </a>
-              <span className="text-white/40 hidden sm:inline">/</span>
+              <span className="text-white/40 hidden xl:inline">/</span>
               <a
                 href="tel:+250781198780"
-                className="hidden sm:inline font-normal tracking-tight text-white/95 hover:text-[#f5c418] transition-colors"
+                className="hidden xl:inline font-normal tracking-tight text-white/95 hover:text-[#f5c418] transition-colors whitespace-nowrap"
               >
                 +250 781 198 780
               </a>
             </div>
             <a
               href="mailto:lesangelos2021@gmail.com"
-              className="hidden md:flex items-center space-x-1.5 hover:text-[#f5c418] transition-colors"
+              className="hidden md:flex items-center space-x-1.5 hover:text-[#f5c418] transition-colors shrink-0"
             >
               <Mail className="w-3.5 h-3.5 text-white shrink-0" />
-              <span className="font-normal tracking-tight text-white/95">
+              <span className="font-normal tracking-tight text-white/95 whitespace-nowrap">
                 lesangelos2021@gmail.com
               </span>
             </a>
           </div>
 
-          {/* Right Portals & Socials */}
-          <div className="flex items-center space-x-3 sm:space-x-4 ml-auto">
-            <div className="hidden sm:flex items-center space-x-2.5 text-[12.5px] text-white/90">
+          {/* Right Language Switcher & Socials */}
+          <div className="flex items-center space-x-3 shrink-0 ml-auto">
+            {/* Bilingual Language Switcher (FR / EN) */}
+            <div className="flex items-center bg-white/10 rounded-full p-0.5 border border-white/20">
+              <Globe className="w-3.5 h-3.5 text-[#f5c418] ml-1.5 mr-1 hidden sm:block" />
               <button
-                onClick={() => navigateTo('contact')}
-                className="hover:text-[#f5c418] transition-colors cursor-pointer"
+                type="button"
+                onClick={() => setLang('fr')}
+                className={`px-2 py-0.5 rounded-full text-[11px] font-bold transition-colors cursor-pointer ${
+                  lang === 'fr'
+                    ? 'bg-[#f5c418] text-[#0b224e]'
+                    : 'text-white/85 hover:text-white'
+                }`}
               >
-                Students Portal
+                FR
               </button>
-              <span className="text-white/35">|</span>
               <button
-                onClick={() => navigateTo('contact')}
-                className="hover:text-[#f5c418] transition-colors cursor-pointer"
+                type="button"
+                onClick={() => setLang('en')}
+                className={`px-2 py-0.5 rounded-full text-[11px] font-bold transition-colors cursor-pointer ${
+                  lang === 'en'
+                    ? 'bg-[#f5c418] text-[#0b224e]'
+                    : 'text-white/85 hover:text-white'
+                }`}
               >
-                Parents Portal
-              </button>
-              <span className="text-white/35">|</span>
-              <button
-                onClick={() => navigateTo('contact')}
-                className="hover:text-[#f5c418] transition-colors cursor-pointer"
-              >
-                Staff Login
+                EN
               </button>
             </div>
-            <div className="flex items-center space-x-2.5 pl-1">
+
+            <div className="flex items-center space-x-2.5 pl-0.5">
               <a
                 href="#facebook"
                 aria-label="Facebook"
@@ -379,7 +501,7 @@ export function App() {
         </div>
       </div>
 
-      {/* 2. MAIN NAVIGATION BAR (Responsive Desktop + Mobile Drawer) */}
+      {/* 2. MAIN NAVIGATION BAR (Responsive Desktop + Left Mobile Sidebar Drawer) */}
       <header className="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
         <div className="max-w-[1160px] mx-auto px-4 sm:px-6 h-[72px] sm:h-[78px] flex items-center justify-between gap-3">
           {/* Crest + Brand Name */}
@@ -389,8 +511,8 @@ export function App() {
             className="flex items-center space-x-2.5 sm:space-x-3 shrink-0 group text-left cursor-pointer"
           >
             <img
-              src="/images/crest.png"
-              alt="Les Angelos Primary School Crest"
+              src={crestSrc}
+              alt={`Les Angelos ${schoolSubTitle} Crest`}
               className="h-[50px] sm:h-[62px] w-auto object-contain"
             />
             <div className="flex flex-col justify-center leading-none">
@@ -398,7 +520,7 @@ export function App() {
                 Les Angelos
               </span>
               <span className="font-serif-school text-[13px] sm:text-[15px] font-semibold text-[#173973] mt-0.5">
-                Primary School
+                {schoolSubTitle}
               </span>
             </div>
           </button>
@@ -408,7 +530,7 @@ export function App() {
             {navItems.map((item) => {
               const active = isNavItemActive(item);
               return (
-                <div key={item.label} className="relative group">
+                <div key={item.key} className="relative group">
                   <button
                     type="button"
                     onClick={() => item.page && navigateTo(item.page, item.sectionId)}
@@ -429,7 +551,7 @@ export function App() {
                   {/* Desktop Hover Dropdown */}
                   {item.dropdown && (
                     <div className="absolute left-0 top-full pt-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
-                      <div className="bg-white rounded-lg shadow-lg border border-slate-100 py-2 min-w-[215px]">
+                      <div className="bg-white rounded-lg shadow-lg border border-slate-100 py-2 min-w-[225px]">
                         {item.dropdown.map((sub) => (
                           <button
                             key={sub.label}
@@ -455,7 +577,7 @@ export function App() {
               onClick={() => navigateTo('contact')}
               className="hidden sm:inline-flex bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[13px] sm:text-[13.5px] px-5 sm:px-6 py-2.5 rounded-full shadow-xs transition-all shrink-0 cursor-pointer"
             >
-              Apply Now
+              {isFr ? 'S’inscrire' : 'Apply Now'}
             </button>
 
             <button
@@ -498,8 +620,8 @@ export function App() {
                 className="flex items-center space-x-2.5 text-left cursor-pointer"
               >
                 <img
-                  src="/images/crest.png"
-                  alt="Les Angelos Primary School Crest"
+                  src={crestSrc}
+                  alt={`Les Angelos ${schoolSubTitle} Crest`}
                   className="h-[46px] w-auto object-contain"
                 />
                 <div className="flex flex-col justify-center leading-none">
@@ -507,7 +629,7 @@ export function App() {
                     Les Angelos
                   </span>
                   <span className="font-serif-school text-[12.5px] font-semibold text-[#173973] mt-0.5">
-                    Primary School
+                    {schoolSubTitle}
                   </span>
                 </div>
               </button>
@@ -522,13 +644,45 @@ export function App() {
               </button>
             </div>
 
+            {/* Sidebar Language Switcher Bar */}
+            <div className="px-4 py-2.5 bg-[#ebf0fc]/60 border-b border-slate-100 flex items-center justify-between">
+              <span className="text-[12px] font-bold text-[#0b2559] flex items-center space-x-1.5">
+                <Globe className="w-3.5 h-3.5 text-[#0e4391]" />
+                <span>{isFr ? 'Langue / Language' : 'Language / Langue'}</span>
+              </span>
+              <div className="flex items-center bg-white rounded-full p-0.5 border border-slate-200 shadow-2xs">
+                <button
+                  type="button"
+                  onClick={() => setLang('fr')}
+                  className={`px-2.5 py-0.5 rounded-full text-[11.5px] font-bold transition-colors cursor-pointer ${
+                    lang === 'fr'
+                      ? 'bg-[#092b68] text-white'
+                      : 'text-[#0b2559] hover:bg-slate-100'
+                  }`}
+                >
+                  Français
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('en')}
+                  className={`px-2.5 py-0.5 rounded-full text-[11.5px] font-bold transition-colors cursor-pointer ${
+                    lang === 'en'
+                      ? 'bg-[#092b68] text-white'
+                      : 'text-[#0b2559] hover:bg-slate-100'
+                  }`}
+                >
+                  English
+                </button>
+              </div>
+            </div>
+
             {/* Sidebar Navigation Links */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+            <div className="flex-1 overflow-y-auto px-4 py-3 space-y-1">
               {navItems.map((item) => {
-                const isExpanded = openMobileDropdown === item.label;
+                const isExpanded = openMobileDropdown === item.key;
                 const active = isNavItemActive(item);
                 return (
-                  <div key={item.label} className="border-b border-slate-100/80 last:border-none">
+                  <div key={item.key} className="border-b border-slate-100/80 last:border-none">
                     <div className="flex items-center justify-between">
                       <button
                         type="button"
@@ -547,7 +701,7 @@ export function App() {
                         <button
                           type="button"
                           onClick={() =>
-                            setOpenMobileDropdown(isExpanded ? null : item.label)
+                            setOpenMobileDropdown(isExpanded ? null : item.key)
                           }
                           aria-label={`Expand ${item.label}`}
                           className="p-2.5 text-[#092b68] hover:bg-slate-100 rounded-md cursor-pointer ml-1"
@@ -580,28 +734,28 @@ export function App() {
               })}
             </div>
 
-            {/* Sidebar Footer: Portals, Contact Info & Apply Now Button */}
+            {/* Sidebar Footer: Portals & Apply Now Button */}
             <div className="p-4 border-t border-slate-100 bg-[#f8faff] space-y-3.5 shrink-0">
               <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[12px] font-semibold text-[#2c436f]">
                 <button
                   onClick={() => navigateTo('contact')}
                   className="hover:text-[#092b68] cursor-pointer"
                 >
-                  Students Portal
+                  {isFr ? 'Portail Élèves' : 'Students Portal'}
                 </button>
                 <span>•</span>
                 <button
                   onClick={() => navigateTo('contact')}
                   className="hover:text-[#092b68] cursor-pointer"
                 >
-                  Parents Portal
+                  {isFr ? 'Portail Parents' : 'Parents Portal'}
                 </button>
                 <span>•</span>
                 <button
                   onClick={() => navigateTo('contact')}
                   className="hover:text-[#092b68] cursor-pointer"
                 >
-                  Staff Login
+                  {isFr ? 'Personnel' : 'Staff Login'}
                 </button>
               </div>
 
@@ -610,7 +764,7 @@ export function App() {
                 onClick={() => navigateTo('contact')}
                 className="w-full inline-flex items-center justify-center bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[14px] px-6 py-3 rounded-full shadow-xs transition-all cursor-pointer"
               >
-                Apply Now
+                {isFr ? 'S’inscrire Maintenant' : 'Apply Now'}
               </button>
             </div>
           </aside>
@@ -618,9 +772,9 @@ export function App() {
       </header>
 
       {/* PAGE CONTENT ROUTER */}
-      {currentPage === 'about' && <AboutPage onNavigate={navigateTo} />}
-      {currentPage === 'gallery' && <GalleryPage onNavigate={navigateTo} />}
-      {currentPage === 'contact' && <ContactPage onNavigate={navigateTo} />}
+      {currentPage === 'about' && <AboutPage onNavigate={navigateTo} lang={lang} />}
+      {currentPage === 'gallery' && <GalleryPage onNavigate={navigateTo} lang={lang} />}
+      {currentPage === 'contact' && <ContactPage onNavigate={navigateTo} lang={lang} />}
 
       {currentPage === 'home' && (
         <>
@@ -670,18 +824,20 @@ export function App() {
 
             {/* Hero Content Container */}
             <div className="relative z-10 max-w-[1160px] mx-auto px-4 sm:px-6 h-full flex flex-col justify-center">
-              <div className="max-w-[540px] text-white -mt-4 sm:-mt-3">
+              <div className="max-w-[560px] text-white -mt-4 sm:-mt-3">
                 <p className="text-[24px] sm:text-[33px] font-bold leading-tight tracking-tight drop-shadow-xs">
-                  Welcome to
+                  {isFr ? 'Bienvenue à' : 'Welcome to'}
                 </p>
                 <h1 className="text-[38px] sm:text-[58px] font-extrabold leading-[1.05] tracking-tight mt-0.5 drop-shadow-xs">
                   Les Angelos
                 </h1>
                 <h2 className="text-[26px] sm:text-[41px] font-bold leading-[1.15] tracking-tight mt-0.5 drop-shadow-xs">
-                  Primary School
+                  {schoolSubTitle}
                 </h2>
                 <p className="text-[14.5px] sm:text-[18.5px] font-medium text-white/95 mt-3 sm:mt-3.5 tracking-tight drop-shadow-xs">
-                  Nurturing Young Minds for a Brighter Future.
+                  {isFr
+                    ? 'Nourrir les jeunes esprits pour un avenir meilleur.'
+                    : 'Nurturing Young Minds for a Brighter Future.'}
                 </p>
 
                 <div className="mt-5 sm:mt-6">
@@ -690,7 +846,7 @@ export function App() {
                     onClick={() => navigateTo('about')}
                     className="inline-flex items-center space-x-2.5 bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[13.5px] sm:text-[14px] px-5 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-md transition-all cursor-pointer"
                   >
-                    <span>Discover Our School</span>
+                    <span>{isFr ? 'Découvrir Notre École' : 'Discover Our School'}</span>
                     <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                   </button>
                 </div>
@@ -802,16 +958,19 @@ export function App() {
                 <div className="lg:col-span-6">
                   <div className="w-12 h-[3.5px] bg-[#f5c418] rounded-full mb-3" />
                   <h2 className="text-[22px] sm:text-[26px] font-extrabold text-[#0b2559] tracking-tight">
-                    About Les Angelos Primary School
+                    {isFr
+                      ? 'À Propos de l’École Primaire Les Angelos'
+                      : 'About Les Angelos Primary School'}
                   </h2>
                   <p className="text-[14.5px] text-[#1c335f] leading-[1.6] mt-3.5">
-                    Les Angelos Primary School is dedicated to providing high-quality education in a
-                    friendly and disciplined environment. We believe every child has potential, and
-                    we are here to help them achieve their dreams.
+                    {isFr
+                      ? 'L’École Primaire Les Angelos se consacre à offrir un enseignement de haute qualité dans un environnement convivial et discipliné. Nous croyons que chaque enfant a du potentiel, et nous sommes là pour l’aider à réaliser ses rêves.'
+                      : 'Les Angelos Primary School is dedicated to providing high-quality education in a friendly and disciplined environment. We believe every child has potential, and we are here to help them achieve their dreams.'}
                   </p>
                   <p className="text-[14.5px] text-[#1c335f] leading-[1.6] mt-3.5">
-                    With experienced teachers, modern facilities and a strong values-based
-                    curriculum, we prepare our pupils for a successful future in school and beyond.
+                    {isFr
+                      ? 'Avec des enseignants expérimentés, des installations modernes et un programme solide fondé sur les valeurs, nous préparons nos élèves à un avenir réussi à l’école et au-delà.'
+                      : 'With experienced teachers, modern facilities and a strong values-based curriculum, we prepare our pupils for a successful future in school and beyond.'}
                   </p>
 
                   <div className="mt-6">
@@ -820,7 +979,7 @@ export function App() {
                       onClick={() => navigateTo('about')}
                       className="inline-flex items-center space-x-2.5 bg-[#082a68] hover:bg-[#0b3582] text-white font-semibold text-[13.5px] px-6 py-3 rounded-full shadow-xs transition-all cursor-pointer"
                     >
-                      <span>Learn More About Us</span>
+                      <span>{isFr ? 'En Savoir Plus Sur Nous' : 'Learn More About Us'}</span>
                       <ArrowRight className="w-4 h-4 stroke-[2.2]" />
                     </button>
                   </div>
@@ -839,11 +998,12 @@ export function App() {
                 {/* Left Intro Column */}
                 <div className="lg:col-span-4 pr-2">
                   <h2 className="text-[22px] sm:text-[25px] font-extrabold text-[#0b2559] tracking-tight">
-                    Our Academic Programs
+                    {isFr ? 'Nos Programmes Scolaires' : 'Our Academic Programs'}
                   </h2>
                   <p className="text-[14px] text-[#1c335f] leading-[1.55] mt-2.5">
-                    We offer a complete primary education from P1 to P6, focusing on knowledge,
-                    creativity and good values.
+                    {isFr
+                      ? 'Nous offrons un enseignement primaire complet de P1 à P6, axé sur le savoir, la créativité et les bonnes valeurs.'
+                      : 'We offer a complete primary education from P1 to P6, focusing on knowledge, creativity and good values.'}
                   </p>
                   <div className="mt-5">
                     <button
@@ -851,7 +1011,7 @@ export function App() {
                       onClick={() => navigateTo('about')}
                       className="inline-flex items-center space-x-2 bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[13.5px] px-5 py-2.5 rounded-full shadow-xs transition-all cursor-pointer"
                     >
-                      <span>Explore Our Curriculum</span>
+                      <span>{isFr ? 'Découvrir Notre Programme' : 'Explore Our Curriculum'}</span>
                       <ArrowRight className="w-4 h-4 stroke-[2.4]" />
                     </button>
                   </div>
@@ -862,20 +1022,34 @@ export function App() {
                   {/* Card 1 */}
                   <div className="bg-white rounded-[10px] px-3 py-5 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(11,37,89,0.05)]">
                     <OpenBookIcon />
-                    <h3 className="text-[14.5px] font-bold text-[#0b2559] mt-3">Core Subjects</h3>
+                    <h3 className="text-[14.5px] font-bold text-[#0b2559] mt-3">
+                      {isFr ? 'Matières Principales' : 'Core Subjects'}
+                    </h3>
                     <p className="text-[12.5px] text-[#2c436f] leading-[1.35] mt-1">
-                      (Math, English,
-                      <br />
-                      Science...)
+                      {isFr ? (
+                        <>
+                          (Maths, Français,
+                          <br />
+                          Anglais, Sciences...)
+                        </>
+                      ) : (
+                        <>
+                          (Math, English,
+                          <br />
+                          Science...)
+                        </>
+                      )}
                     </p>
                   </div>
 
                   {/* Card 2 */}
                   <div className="bg-white rounded-[10px] px-3 py-5 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(11,37,89,0.05)]">
                     <PaletteBrushIcon />
-                    <h3 className="text-[14.5px] font-bold text-[#0b2559] mt-3">Creative Arts</h3>
+                    <h3 className="text-[14.5px] font-bold text-[#0b2559] mt-3">
+                      {isFr ? 'Arts Créatifs' : 'Creative Arts'}
+                    </h3>
                     <p className="text-[12.5px] text-[#2c436f] leading-[1.35] mt-1">
-                      (Music, Art, Drama)
+                      {isFr ? '(Musique, Art, Théâtre)' : '(Music, Art, Drama)'}
                     </p>
                   </div>
 
@@ -883,12 +1057,22 @@ export function App() {
                   <div className="bg-white rounded-[10px] px-3 py-5 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(11,37,89,0.05)]">
                     <SoccerBallIcon />
                     <h3 className="text-[14.5px] font-bold text-[#0b2559] mt-3">
-                      Sports &amp; Games
+                      {isFr ? 'Sports & Jeux' : 'Sports & Games'}
                     </h3>
                     <p className="text-[12.5px] text-[#2c436f] leading-[1.35] mt-1">
-                      (Healthy and active
-                      <br />
-                      pupils)
+                      {isFr ? (
+                        <>
+                          (Élèves actifs et
+                          <br />
+                          en bonne santé)
+                        </>
+                      ) : (
+                        <>
+                          (Healthy and active
+                          <br />
+                          pupils)
+                        </>
+                      )}
                     </p>
                   </div>
 
@@ -896,12 +1080,22 @@ export function App() {
                   <div className="bg-white rounded-[10px] px-3 py-5 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(11,37,89,0.05)]">
                     <HandshakeIcon />
                     <h3 className="text-[14.5px] font-bold text-[#0b2559] mt-3">
-                      Values &amp; Ethics
+                      {isFr ? 'Valeurs & Éthique' : 'Values & Ethics'}
                     </h3>
                     <p className="text-[12.5px] text-[#2c436f] leading-[1.35] mt-1">
-                      (Respect, honesty,
-                      <br />
-                      kindness)
+                      {isFr ? (
+                        <>
+                          (Respect, honnêteté,
+                          <br />
+                          bienveillance)
+                        </>
+                      ) : (
+                        <>
+                          (Respect, honesty,
+                          <br />
+                          kindness)
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
@@ -919,14 +1113,14 @@ export function App() {
                     <div className="w-14 h-[3.5px] bg-[#f5c418] rounded-full mb-2.5" />
                     <div className="flex items-center justify-between mb-4">
                       <h2 className="text-[22px] sm:text-[24px] font-extrabold text-[#0b2559] tracking-tight">
-                        Latest News &amp; Events
+                        {isFr ? 'Actualités & Événements' : 'Latest News & Events'}
                       </h2>
                       <button
                         type="button"
                         onClick={() => navigateTo('gallery')}
                         className="inline-flex items-center space-x-1 text-[13px] font-bold text-[#0b2559] hover:text-[#0e4391] transition-colors cursor-pointer"
                       >
-                        <span>View All News</span>
+                        <span>{isFr ? 'Voir Tout' : 'View All News'}</span>
                         <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
                       </button>
                     </div>
@@ -959,7 +1153,7 @@ export function App() {
                             onClick={() => navigateTo('gallery')}
                             className="inline-flex items-center space-x-1 text-[12.5px] font-bold text-[#0b2559] hover:text-[#0e4391] mt-2.5 cursor-pointer"
                           >
-                            <span>Read More</span>
+                            <span>{isFr ? 'Lire la Suite' : 'Read More'}</span>
                             <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
                           </button>
                         </div>
@@ -973,7 +1167,7 @@ export function App() {
                   <div className="bg-[#052968] text-white rounded-[12px] p-6 w-full flex flex-col justify-between shadow-sm relative">
                     <div>
                       <h2 className="text-[21px] font-extrabold tracking-tight text-white">
-                        What Parents Say
+                        {isFr ? 'Ce Que Disent les Parents' : 'What Parents Say'}
                       </h2>
 
                       {/* Yellow Opening Quote Icon + Indented Quote Text */}
@@ -1065,8 +1259,8 @@ export function App() {
                 className="flex items-center space-x-3 text-left cursor-pointer"
               >
                 <img
-                  src="/images/crest.png"
-                  alt="Les Angelos Primary School Crest"
+                  src={crestSrc}
+                  alt={`Les Angelos ${schoolSubTitle} Crest`}
                   className="h-[62px] w-auto object-contain"
                 />
                 <div className="flex flex-col justify-center leading-none">
@@ -1074,25 +1268,29 @@ export function App() {
                     Les Angelos
                   </span>
                   <span className="font-serif-school text-[15px] font-semibold text-white/95 mt-0.5">
-                    Primary School
+                    {schoolSubTitle}
                   </span>
                 </div>
               </button>
               <p className="italic text-[14px] text-white/90 mt-4 font-normal">
-                Nurturing Young Minds for a Brighter Future.
+                {isFr
+                  ? 'Nourrir les jeunes esprits pour un avenir meilleur.'
+                  : 'Nurturing Young Minds for a Brighter Future.'}
               </p>
             </div>
 
             {/* Col 2: Quick Links (2 cols) */}
             <div className="md:col-span-2">
-              <h3 className="text-[14.5px] font-bold text-white mb-3">Quick Links</h3>
+              <h3 className="text-[14.5px] font-bold text-white mb-3">
+                {isFr ? 'Liens Rapides' : 'Quick Links'}
+              </h3>
               <ul className="space-y-1.5 text-[13.5px] text-white/90">
                 <li>
                   <button
                     onClick={() => navigateTo('home')}
                     className="hover:text-[#f5c418] transition-colors cursor-pointer"
                   >
-                    Home
+                    {isFr ? 'Accueil' : 'Home'}
                   </button>
                 </li>
                 <li>
@@ -1100,7 +1298,7 @@ export function App() {
                     onClick={() => navigateTo('about')}
                     className="hover:text-[#f5c418] transition-colors cursor-pointer"
                   >
-                    About Us
+                    {isFr ? 'À Propos' : 'About Us'}
                   </button>
                 </li>
                 <li>
@@ -1108,7 +1306,7 @@ export function App() {
                     onClick={() => navigateTo('home', 'academics')}
                     className="hover:text-[#f5c418] transition-colors cursor-pointer"
                   >
-                    Academics
+                    {isFr ? 'Programmes' : 'Academics'}
                   </button>
                 </li>
                 <li>
@@ -1116,7 +1314,7 @@ export function App() {
                     onClick={() => navigateTo('gallery')}
                     className="hover:text-[#f5c418] transition-colors cursor-pointer"
                   >
-                    Gallery
+                    {isFr ? 'Galerie' : 'Gallery'}
                   </button>
                 </li>
                 <li>
@@ -1134,7 +1332,9 @@ export function App() {
             <div className="md:col-span-3">
               <div className="relative inline-block mb-3">
                 <div className="w-11 h-[2.5px] bg-[#f5c418] mb-0.5 ml-6" />
-                <h3 className="text-[14.5px] font-bold text-white">Get In Touch</h3>
+                <h3 className="text-[14.5px] font-bold text-white">
+                  {isFr ? 'Contactez-Nous' : 'Get In Touch'}
+                </h3>
               </div>
               <ul className="space-y-2.5 text-[13.5px] text-white/90">
                 <li className="flex items-start space-x-2.5">
@@ -1192,9 +1392,13 @@ export function App() {
 
             {/* Col 4: Newsletter (3 cols) */}
             <div className="sm:col-span-2 md:col-span-3">
-              <h3 className="text-[14.5px] font-bold text-white mb-2">Newsletter</h3>
+              <h3 className="text-[14.5px] font-bold text-white mb-2">
+                {isFr ? 'Bulletin d’Information' : 'Newsletter'}
+              </h3>
               <p className="text-[12.5px] text-white/85 mb-3.5 leading-relaxed">
-                Stay updated with our latest news and events.
+                {isFr
+                  ? 'Restez informés de nos dernières actualités et événements.'
+                  : 'Stay updated with our latest news and events.'}
               </p>
               <form
                 onSubmit={(e) => e.preventDefault()}
@@ -1202,14 +1406,14 @@ export function App() {
               >
                 <input
                   type="email"
-                  placeholder="Your email address"
+                  placeholder={isFr ? 'Votre adresse e-mail' : 'Your email address'}
                   className="w-full bg-white text-slate-800 placeholder:text-slate-400 text-[13px] px-3.5 py-2.5 rounded-[5px] focus:outline-none"
                 />
                 <button
                   type="submit"
                   className="bg-[#f5c418] hover:bg-[#eab808] text-[#0b224e] font-bold text-[13px] px-4 py-2.5 rounded-[5px] shrink-0 transition-colors cursor-pointer"
                 >
-                  Subscribe
+                  {isFr ? 'S’abonner' : 'Subscribe'}
                 </button>
               </form>
             </div>
@@ -1219,27 +1423,31 @@ export function App() {
         {/* Bottom Copyright Bar */}
         <div className="bg-[#011c52] border-t border-white/10 py-3.5 text-[12px] text-white/80">
           <div className="max-w-[1160px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-            <p>© 2026 Les Angelos Primary School. All rights reserved.</p>
+            <p>
+              {isFr
+                ? '© 2026 Les Angelos École Primaire. Tous droits réservés.'
+                : '© 2026 Les Angelos Primary School. All rights reserved.'}
+            </p>
             <div className="flex items-center space-x-2.5">
               <button
                 onClick={() => navigateTo('contact')}
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                Privacy Policy
+                {isFr ? 'Politique de Confidentialité' : 'Privacy Policy'}
               </button>
               <span className="text-white/30">|</span>
               <button
                 onClick={() => navigateTo('contact')}
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                Terms of Service
+                {isFr ? 'Conditions d’Utilisation' : 'Terms of Service'}
               </button>
               <span className="text-white/30">|</span>
               <button
                 onClick={() => navigateTo('home')}
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                Sitemap
+                {isFr ? 'Plan du Site' : 'Sitemap'}
               </button>
             </div>
           </div>
